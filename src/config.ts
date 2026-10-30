@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "productmodulo",
-	subtitle: "Tricks, interview notes, logs",
+	subtitle: "Competitive programming and notes",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 330, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -42,8 +42,11 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
-		{ name: "Tricks", url: "/archive/?category=Tricks" },
-		{ name: "Interview notes", url: "/archive/?category=Interview%20notes" },
+		{
+			name: "Competitive Programming",
+			url: "/archive/?category=Competitive%20Programming",
+		},
+		{ name: "Notes", url: "/archive/?category=Notes" },
 		LinkPreset.Archive,
 		LinkPreset.About,
 	],
@@ -52,7 +55,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "productmodulo",
-	bio: "Software engineer. Competitive programming, interview notes, and the occasional proof.",
+	bio: "Software engineer. Competitive programming.",
 	links: [
 		{
 			name: "GitHub",

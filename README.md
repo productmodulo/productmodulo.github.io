@@ -12,7 +12,7 @@ pnpm build      # outputs to dist/
 
 ## Writing a post
 
-1. Copy a template from `templates/` into `src/content/posts/` (e.g. `src/content/posts/my-post.md`).
+1. Copy a template from `templates/` (`competitive-programming.md` or `notes.md`) into `src/content/posts/` (e.g. `src/content/posts/my-post.md`).
 2. Fill in the front matter and sections. Set `draft: false` to publish.
 3. Push to `main`; GitHub Actions builds and deploys the site.
 

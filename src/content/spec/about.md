@@ -1,7 +1,7 @@
 # About
 
-Software engineer. This site collects short write-ups on competitive programming techniques, notes from technical interviews, and the occasional proof.
+Software engineer. This site collects write-ups on competitive programming techniques and data structures, plus notes on other technical topics.
 
-Posts are organized into three categories: **Tricks** (reusable techniques with problems that use them), **Interview notes** (what was asked, what went wrong, what to change), and **Logs** (shorter dated entries).
+Posts are organized into two categories: **Competitive Programming** (techniques, with problems that use them) and **Notes** (everything else).
 
 Corrections are welcome via [GitHub](https://github.com/productmodulo).

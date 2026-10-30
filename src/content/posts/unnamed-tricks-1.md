@@ -3,7 +3,7 @@ title: "Unnamed tricks #1 — count per element, not per subarray"
 published: 2026-10-30
 description: "Placeholder. Replace with a one- or two-sentence summary."
 tags: [counting, expected-value]
-category: Tricks
+category: Competitive Programming
 draft: false
 ---
 

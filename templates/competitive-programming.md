@@ -3,16 +3,16 @@ title: "TODO title"
 published: 2026-01-01
 description: "TODO one- or two-sentence summary."
 tags: []
-category: Interview notes
+category: Competitive Programming
 draft: true
 ---
 
-## Context
+## Statement
 
-## Problem
+## Why it works (two sentences)
 
-## What I did
+## When it applies
 
-## What went wrong
+## Problems
 
-## What to change
+## Pitfalls
