@@ -4,6 +4,8 @@ declare global {
 	interface Window {
 		// type from '@swup/astro' is incorrect
 		swup: AstroIntegration;
+		// GoatCounter count.js (only present when analyticsConfig.goatcounterCode is set)
+		goatcounter?: { count?: (vars: { path?: string }) => void };
 		pagefind: {
 			search: (query: string) => Promise<{
 				results: Array<{

@@ -42,6 +42,11 @@ export const siteConfig: SiteConfig = {
 // Categories used in posts but not listed here get a page too.
 export const categoryNames: string[] = ["Algorithms", "Notes"];
 
+// GoatCounter site code (the "xxx" in https://xxx.goatcounter.com). Leave empty to disable analytics.
+export const analyticsConfig = {
+	goatcounterCode: "productmodulo",
+};
+
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,

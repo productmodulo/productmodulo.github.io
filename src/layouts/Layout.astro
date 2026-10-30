@@ -4,7 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import { profileConfig, siteConfig } from "@/config";
+import { analyticsConfig, profileConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -147,6 +147,9 @@ const bannerOffset =
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
+		{analyticsConfig.goatcounterCode && (
+			<script is:inline async data-goatcounter={`https://${analyticsConfig.goatcounterCode}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>
+		)}
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
@@ -431,6 +434,9 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('page:view', () => {
+		// Count client-side navigations in GoatCounter (the first page load is counted by count.js itself)
+		window.goatcounter?.count?.({ path: location.pathname + location.search + location.hash })
+
 		// hide the temp high element when the transition is done
 		const heightExtend = document.getElementById('page-height-extend')
 		if (heightExtend) {
