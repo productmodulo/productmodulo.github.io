@@ -32,3 +32,4 @@ yarn.lock
 
 # design references (not published)
 design/
+.asset-history/

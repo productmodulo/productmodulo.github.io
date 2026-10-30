@@ -26,6 +26,19 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - name: Restore assets from recent deploys
+        uses: actions/cache/restore@v4
+        with:
+          path: .asset-history
+          key: astro-assets-${{ github.run_id }}
+          restore-keys: astro-assets-
+      - name: Keep assets from recent deploys
+        run: scripts/retain-assets.sh .asset-history "${{ github.run_number }}"
+      - name: Save asset history
+        uses: actions/cache/save@v4
+        with:
+          path: .asset-history
+          key: astro-assets-${{ github.run_id }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
