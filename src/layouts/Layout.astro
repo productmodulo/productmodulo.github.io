@@ -4,6 +4,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
+import { getImage } from "astro:assets";
+import avatarImage from "../assets/images/avatar.webp";
 import { analyticsConfig, profileConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
@@ -53,6 +55,11 @@ if (title) {
 } else {
 	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
 }
+const metaDescription = description || siteConfig.description || pageTitle;
+
+// Small avatar thumbnail for link previews (Discord etc.)
+const ogImage = await getImage({ src: avatarImage, width: 256, format: "png" });
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
@@ -81,23 +88,25 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || pageTitle}>
+		<meta name="description" content={metaDescription}>
 		<meta name="author" content={profileConfig.name}>
 
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
-		<meta property="og:description" content={description || pageTitle}>
+		<meta property="og:description" content={metaDescription}>
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
         <meta property="og:type" content="website" />
         )}
 
-		<meta name="twitter:card" content="summary_large_image">
+		<meta property="og:image" content={ogImageUrl}>
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:image" content={ogImageUrl}>
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
-		<meta name="twitter:description" content={description || pageTitle}>
+		<meta name="twitter:description" content={metaDescription}>
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />

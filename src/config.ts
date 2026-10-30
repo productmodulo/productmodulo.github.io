@@ -10,6 +10,8 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "productmodulo",
 	subtitle: "Algorithms and notes",
+	description:
+		"Short write-ups on algorithms and data structures, mostly from competitive programming, plus notes on other technical topics.",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 330, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
