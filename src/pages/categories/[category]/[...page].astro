@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from "astro";
+import Pagination from "../../../components/control/Pagination.astro";
+import PostPage from "../../../components/PostPage.astro";
+import { categoryNames } from "../../../config";
+import { PAGE_SIZE } from "../../../constants/constants";
+import MainGridLayout from "../../../layouts/MainGridLayout.astro";
+import { getSortedPosts } from "../../../utils/content-utils";
+import { getCategorySlug } from "../../../utils/url-utils";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const posts = await getSortedPosts();
+	const names = new Set(categoryNames.map((c) => c.trim()));
+	for (const post of posts) {
+		const c = post.data.category?.trim();
+		if (c) names.add(c);
+	}
+	return [...names].flatMap((name) =>
+		paginate(
+			posts.filter((post) => post.data.category?.trim() === name),
+			{
+				pageSize: PAGE_SIZE,
+				params: { category: decodeURIComponent(getCategorySlug(name)) },
+				props: { name },
+			},
+		),
+	);
+}) satisfies GetStaticPaths;
+
+const { page, name } = Astro.props;
+const len = page.data.length;
+---
+
+<MainGridLayout title={name}>
+    <div class="card-base px-6 md:px-9 py-5 mb-4 onload-animation flex items-baseline gap-3">
+        <h1 class="text-2xl font-bold text-90">{name}</h1>
+        <span class="text-50">{page.total} {page.total === 1 ? "post" : "posts"}</span>
+    </div>
+    {len > 0
+        ? <PostPage page={page}></PostPage>
+        : <div class="card-base px-6 md:px-9 py-6 mb-4 text-75 onload-animation">No posts yet.</div>}
+    {page.lastPage > 1 && <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>}
+</MainGridLayout>

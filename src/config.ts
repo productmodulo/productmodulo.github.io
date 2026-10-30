@@ -38,11 +38,15 @@ export const siteConfig: SiteConfig = {
 	],
 };
 
+// Categories that always get a page (/categories/<name>/), even with no posts yet.
+// Categories used in posts but not listed here get a page too.
+export const categoryNames: string[] = ["Algorithms", "Notes"];
+
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
-		{ name: "Algorithms", url: "/archive/?category=Algorithms" },
-		{ name: "Notes", url: "/archive/?category=Notes" },
+		{ name: "Algorithms", url: "/categories/algorithms/" },
+		{ name: "Notes", url: "/categories/notes/" },
 		LinkPreset.Archive,
 		LinkPreset.About,
 	],
