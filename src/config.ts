@@ -57,6 +57,11 @@ export const navBarConfig: NavBarConfig = {
 	],
 };
 
+// Avatar click: always advances the k! mod 998244353 counter; also jumps to a random post when enabled.
+export const avatarConfig = {
+	randomPost: false, // turn on once there are enough posts
+};
+
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "productmodulo",
