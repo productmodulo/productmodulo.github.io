@@ -150,3 +150,10 @@
     }
   }
 }
+/* Below lg the sidebar is stacked under the content; hide it on post and about pages. */
+@media (max-width: 1023px) {
+    #main-grid:has(#post-container) #sidebar,
+    #main-grid:has(#about-container) #sidebar {
+        display: none;
+    }
+}
