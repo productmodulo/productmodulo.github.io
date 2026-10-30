@@ -11,7 +11,7 @@ draft: false
 
 **Heavy-Light Decomposition(HLD)** is a common technique to process path queries and updates on trees in competitive programming.
 
-If the operation is easy and there is no update, only LCA is sufficient to process path queries.
+If the operation is easy and there is no update, only LCA-based techniques are sufficient to process path queries.
 
 For example, if `query(a,b)` means "Calculate the sum of integer values from node `a` to node `b`", then we can solve it using sparse table in $O((N + Q) \log{N})$.
 
@@ -35,7 +35,7 @@ Claim: For every path from root to arbitrary node, that path always decomposed i
 Proof:
 1. Light edge means that child's subtree size is at most (this node's subtree size - 1)/2. It's because heavy child's subtree size is at least light child's subtree size.
 2. Therefore, if we go down from the root to arbitrary node, there are always at most $\lfloor \log_{2}{(N+1)} \rfloor - 1$ light edges.
-3. So we can decompose the path into $\lfloor \log_{2}{(N+1)} \rfloor$ heavy paths.
+3. So we can decompose the path into at most $\lfloor \log_{2}{(N+1)} \rfloor$ heavy paths.
 
 So we can decompose every path into at most $2 \lfloor \log_{2}{(N+1)} \rfloor - 1$ heavy paths. ($-1$ is because of sharing the LCA)
 
