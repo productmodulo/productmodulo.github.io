@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "productmodulo",
-	subtitle: "Competitive programming and notes",
+	subtitle: "Algorithms and notes",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 330, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -31,21 +31,17 @@ export const siteConfig: SiteConfig = {
 	},
 	favicon: [
 		// Leave this array empty to use the default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
-		// }
+		{ src: "/favicon/favicon-32.png", sizes: "32x32" },
+		{ src: "/favicon/favicon-128.png", sizes: "128x128" },
+		{ src: "/favicon/favicon-180.png", sizes: "180x180" },
+		{ src: "/favicon/favicon-192.png", sizes: "192x192" },
 	],
 };
 
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
-		{
-			name: "Competitive Programming",
-			url: "/archive/?category=Competitive%20Programming",
-		},
+		{ name: "Algorithms", url: "/archive/?category=Algorithms" },
 		{ name: "Notes", url: "/archive/?category=Notes" },
 		LinkPreset.Archive,
 		LinkPreset.About,
@@ -55,7 +51,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "productmodulo",
-	bio: "Software engineer. Competitive programming.",
+	bio: "Software engineer into algorithms",
 	links: [
 		{
 			name: "GitHub",
