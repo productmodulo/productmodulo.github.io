@@ -1,10 +1,4 @@
-/* Page transition animations with Swup */
-html.is-changing .transition-swup-fade {
-    @apply transition-all duration-200
-}
-html.is-animating .transition-swup-fade {
-    @apply opacity-0 translate-y-4
-}
+/* Page transition animations are disabled (swup animationClass: false in astro.config.mjs). */
 
 /* Fade-in animations for components */
 @keyframes fade-in-up {
@@ -19,10 +13,11 @@ html.is-animating .transition-swup-fade {
 }
 
 /* Main components */
+/* Load animations are disabled; restore the three lines below to re-enable. */
 .onload-animation {
-    opacity: 0;
-    animation: 300ms fade-in-up;
-    animation-fill-mode: forwards;
+    /* opacity: 0; */
+    /* animation: 300ms fade-in-up; */
+    /* animation-fill-mode: forwards; */
 }
 #navbar {
     animation-delay: 0ms
