@@ -156,3 +156,10 @@
         display: none;
     }
 }
+
+/* On mobile/tablet the profile card (avatar, bio) is shown only on the About page. */
+@media (max-width: 1023px) {
+    #main-grid:not(:has(#about-container)) #sidebar-profile {
+        display: none;
+    }
+}

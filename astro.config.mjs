@@ -29,6 +29,10 @@ export default defineConfig({
 	site: "https://productmodulo.github.io/",
 	base: "/",
 	trailingSlash: "always",
+	build: {
+		// Inline CSS into each page so a stale cached page never points at a deleted stylesheet after a deploy.
+		inlineStylesheets: "always",
+	},
 	integrations: [
 		tailwind({
 			nesting: true,
