@@ -30,7 +30,7 @@ export const siteConfig: SiteConfig = {
 		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
 	},
 	favicon: [
-		// Leave this array empty to use the default favicon
+		// Files live in public/favicon/. Fuwari's default favicons were removed, so keep this list non-empty.
 		{ src: "/favicon/favicon-32.png", sizes: "32x32" },
 		{ src: "/favicon/favicon-128.png", sizes: "128x128" },
 		{ src: "/favicon/favicon-180.png", sizes: "180x180" },
