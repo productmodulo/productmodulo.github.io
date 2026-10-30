@@ -1,23 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
 import { profileConfig } from "../../config";
-import { url } from "../../utils/url-utils";
+import { getSortedPosts } from "../../utils/content-utils";
+import { getPostUrlBySlug, url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+const postUrls = (await getSortedPosts()).map((post) => getPostUrlBySlug(post.slug));
 ---
 <div class="card-base p-3">
-    <a aria-label="Go to About Page" href={url('/about/')}
+    <!-- Avatar: click goes to a random post and advances k! mod 998244353 (falls back to About without JS) -->
+    <a id="profile-avatar" data-no-swup aria-label="Go to a random post" href={url('/about/')} data-posts={JSON.stringify(postUrls)}
        class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
        max-w-[7rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
         <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
         w-full h-full z-50 flex items-center justify-center">
-            <Icon name="fa6-regular:address-card"
+            <Icon name="material-symbols:casino-outline"
                   class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
         <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
     </a>
+    <div id="profile-factorial" class="hidden text-center text-xs text-50 font-mono mb-2 transition"></div>
     <div class="px-2">
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
         <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
@@ -37,3 +41,55 @@ const config = profileConfig;
     </div>
 </div>
 
+<script>
+const P = 998244353;
+const KEY = "profile-factorial-k";
+const MAX_K = 1_000_000; // stored k above this is treated as tampered and reset
+
+const avatar = document.getElementById("profile-avatar");
+const line = document.getElementById("profile-factorial");
+
+// Only k is stored; k! mod P is recomputed, so the shown value can't be edited directly.
+function loadK(): number {
+	const k = Number(sessionStorage.getItem(KEY));
+	return Number.isInteger(k) && k >= 0 && k <= MAX_K ? k : 0;
+}
+
+function factorialMod(k: number): number {
+	let r = 1;
+	for (let i = 2; i <= k; i++) r = (r * i) % P; // r * i < 2^53 for k <= MAX_K
+	return r;
+}
+
+let k = loadK();
+let value = factorialMod(k);
+
+function render() {
+	if (!line || k === 0) return;
+	line.textContent = `${k}! ≡ ${value} (mod ${P})`;
+	line.classList.remove("hidden");
+}
+
+render();
+
+avatar?.addEventListener("click", (e) => {
+	e.preventDefault();
+	if (k >= MAX_K) {
+		k = 0;
+		value = 1;
+	}
+	k += 1;
+	value = (value * k) % P;
+	sessionStorage.setItem(KEY, String(k));
+	render();
+
+	const posts: string[] = JSON.parse(avatar.dataset.posts || "[]");
+	const here = location.pathname;
+	const others = posts.filter((p) => p !== here);
+	if (others.length === 0) return;
+	const target = others[Math.floor(Math.random() * others.length)];
+	const swup = window.swup as unknown as { navigate?: (url: string) => void } | undefined;
+	if (swup?.navigate) swup.navigate(target);
+	else location.assign(target);
+});
+</script>
